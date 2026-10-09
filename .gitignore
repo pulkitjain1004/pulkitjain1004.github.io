@@ -1,0 +1,5 @@
+# Source documents stay local; the deployment includes only website files.
+*.pdf
+_site/
+.DS_Store
+node_modules/
