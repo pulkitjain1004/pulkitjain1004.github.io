@@ -8,6 +8,7 @@ const profile = {
   education: 'Master of Engineering, Industrial Engineering · Texas A&M University, 2018',
   skills: ['SQL · R · Python · dbt', 'Consumer & growth analytics', 'Forecasting & A/B testing', 'Product management', 'RAG · LangGraph · MCP', 'Tableau · Power BI · Domo'],
   projects: [
+    { title: 'Meet my AI counterpart', description: 'Built a chatbot that represents me and answers questions about my professional experience. Explore my background, projects, and career through a conversation with my AI counterpart.', tags: ['Live app', 'AI chatbot', 'Personal project'], url: 'https://udify.app/chat/Vu9K2nkXjRlBYlaO', actionLabel: 'Chat with me' },
     { title: 'RoastOps — inventory copilot', description: 'Built an AI inventory and supply-chain assistant for coffee roasteries and cafés. It combines an SQLite inventory database, retrieval of coffee supply-chain knowledge, and Python tools to calculate safety stock, reorder points, and days of runway.', tags: ['Live app', 'Python', 'Gradio', 'RAG', 'SQLite'], url: 'https://inventory-agent-ok4m.onrender.com/', source: 'https://github.com/pulkitjain1004/inventory_agent' },
     { title: 'Agentic AI for consumer insights', description: 'Built and deployed an AI application that combines qualitative consumer feedback, competitive intelligence, and internal sales data to investigate root causes. Designed an architecture that connects multiple agents and databases using LangGraph and MCP/A2A protocols.', tags: ['Personal project', 'Python', 'Agentic AI', 'RAG'], url: null },
     { title: 'Customer growth & retention', description: 'At Target, refreshed customer segmentation using PCA and K-means, connected voice-of-customer feedback with behavioral data, and led work to retain high-value customers. Targeted Beauty promotions delivered a 2% increase in retention and $40M in net annual profit.', tags: ['Target', 'Segmentation', 'Growth strategy'], url: null },
@@ -50,9 +51,9 @@ profile.projects.forEach((project, index) => {
   const tags = document.createElement('div'); tags.className = 'tags';
   project.tags.forEach(tag => { const el = document.createElement('span'); el.className = 'tag'; el.textContent = tag; tags.append(el); });
   content.append(title, description, tags);
-  if (project.source && validUrl(project.source)) {
+  if ((project.source && validUrl(project.source)) || project.actionLabel) {
     const links = document.createElement('div'); links.className = 'project-actions';
-    [[project.url, 'Try the app'], [project.source, 'View source']].forEach(([url, label]) => {
+    [[project.url, project.actionLabel || 'Try the app'], [project.source, 'View source']].forEach(([url, label]) => {
       if (!validUrl(url)) return;
       const link = document.createElement('a'); link.href = url; link.textContent = `${label} ↗`; links.append(link);
     });
